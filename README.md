@@ -1,164 +1,91 @@
-# MysteriousMap / 房间里的尖塔
+# GlitchedRelic · 故障遗物与神秘地图
 
-An experimental Slay the Spire 2 mod that combines an Isaac-style outer floor
-with short branching Slay the Spire routes inside every room.
+《杀戮尖塔 2》实验性模组：把外层地图变成《以撒的结合》式四方向房间网格，房间内部仍是一小段《杀戮尖塔》式单向分岔路线。同时加入可反复使用的红镐子，随机拼接游戏事件与遗物效果，挖出可能强大、古怪，甚至会坑自己的「故障遗物」。
 
-Current test build: [MysteriousMap 0.17.29](releases/MysteriousMap-v0.17.29.zip).
-Unzip it into the game's `mods` directory so the final folder is
-`mods/MysteriousMap` and contains the DLL, JSON and PCK files. Quit the game
-before replacing an older version. The GitHub repository is named
-`GlitchedRelic`; the in-game mod ID remains `MysteriousMap` for compatibility.
+> 当前版本：**0.17.29** · 已按《杀戮尖塔 2》**0.111.0** 构建与检查。其他游戏版本尚未验证。本项目仍在测试，请先备份重要存档。
 
-Target: Slay the Spire 2 `0.111.x`, .NET 9.
+## 下载与安装
 
-## Map modes
+[下载 MysteriousMap 0.17.29 安装包](releases/MysteriousMap-v0.17.29.zip?raw=1)
 
-In solo play, disabling the room-grid map keeps the game's standard paths but
-adds a selectable chest to the opening row and places 3–4 treasure rooms on
-one complete route to the boss. The red pickaxe remains available in treasure
-rooms, shops, and elite reward screens. Standard
-maps have no bombs. The first three normal fights of each solo act use the weak
-encounter pool; elite and boss fights retain their own pools.
+1. **完全退出游戏。**
+2. 解压安装包，把其中的 `MysteriousMap` 文件夹放进游戏目录的 `mods` 文件夹。已装旧版时覆盖同名文件，不要同时保留多个版本。
+3. 确认最终结构如下；不要多套一层同名文件夹：
 
-With the room-grid map enabled, act one has an opening chest plus 2–3 other
-treasure rooms; later solo acts have 3–4 treasure rooms total. Multiplayer
-keeps the earlier map layout.
+   ```text
+   Slay the Spire 2/
+   └─ mods/
+      └─ MysteriousMap/
+         ├─ MysteriousMap.dll
+         ├─ MysteriousMap.json
+         └─ MysteriousMap.pck
+   ```
 
-## Nested-map preview
+4. 启动游戏，确认模组已启用。在游戏的**设置 → 常规 → 神秘地图**中调整选项，然后**新开一局**体验地图。已经生成的章节不会被设置改成另一种地图。
 
-- Each act uses a deterministic 5×5 outer coordinate space.
-- Eleven visible outer rooms form a connected cardinal layout: start, normal
-  rooms, two or three treasure rooms, and one boss room.
-- Every non-boss outer room contains an independent `1 → 2 → 3 → 1 → exit`
-  route. Route nodes use normal combat, elite, unknown, rest, shop, and treasure
-  encounters. Reaching the unique exit clears the outer room.
-- The boss room uses `rest site → boss`, followed by the second boss on
-  applicable runs.
-- Cleared adjacent outer rooms can be crossed without replaying their route or
-  receiving their reward again.
-- A regular secret room prefers positions touching several visible rooms and
-  never touches the boss. A super-secret room touches exactly one ordinary room
-  and prefers a position far from the start.
-- Two or three ordinary rooms per act drop one bomb when cleared. A bomb can be
-  bought once per shop for 30 gold.
-- In any occupied room, four visible wall buttons spend bombs to probe neighboring empty
-  cells. A correct wall reveals its hidden room; a failed probe still consumes
-  the bomb.
-- During combat a bomb costs two energy and schedules 40 unpowered damage to
-  every enemy after three rounds.
-- Bomb inventory, claimed drops, shop purchases, hidden-room identities, and
-  discoveries are retained in the run save.
-- Map generation and all runtime patches have deterministic and installed-game
-  compatibility tests.
+仓库名是 `GlitchedRelic`；游戏内模组 ID 和安装文件夹仍叫 `MysteriousMap`，这是为了兼容现有存档与资源路径。联机玩家都应安装**相同版本**。
 
-The other custom Isaac relics have been removed from new reward pools. Their
-model definitions and artwork remain only so runs that already own them can
-still load. The Mind and Treasure Map remain optional reveal settings.
+## 玩起来是什么样？
 
-Dataminer (the red pickaxe) is an active relic that needs no
-recharge. In a treasure room, shop, or elite reward screen, its button
-arms the next relic pickup, transforming it into a glitched relic with 3–8
-trigger/outcome links (3 is most common, 8 is rare). Links can branch to
-another outcome or another compatible trigger, so one event can activate multiple effects
-and one effect can have multiple triggers, with at most two links per condition
-or result. Later uses add another 3–8 links without a total cap; repeated
-links stack,
-including branches from existing pairs. Every matched trigger activates with
-no extra proc chance. Common combat events are favored as triggers while rare
-events remain in the pool. The MysteriousMap options include an off-by-default "Start with
-Dataminer" switch for testing; it grants one Dataminer to each player in a new
-run when enabled by the solo player or multiplayer host. The nested map starts with a
-treasure room; the standard solo map instead offers one among its first choices.
-The chest's Dataminer button is checked again when opened, so
-it remains available before the relic is claimed. A separate off-by-default
-option shows a no-cost instant-kill button in new single-player combats.
-"Show glitched relic effects" is enabled by default and displays this run's
-rolled combinations on the relic tooltip; disabling it hides only the details.
-The remaining Dataminer relics use original transparent artwork in `assets/relics`.
-The starting-relic and instant-kill switches do not change an existing save.
-In multiplayer, each player can find and arm their own Dataminer. Its arming
-decision and rolled combinations are sent to peers, as are shared bomb
-purchases, wall blasts and combat fuses. The host's starting-Dataminer choice
-is carried in the multiplayer start payload. All players need the same mod version.
-Eighty-eight generic events cover combat, cards, powers, potions,
-gold, purchases, rewards, relic acquisition, rest sites, rooms and bombs.
-Eighty built-in results plus 180 vanilla-relic fragments include friendly and hostile powers, character-specific
-card generation, potions, block, damage, healing, gold, max HP, bombs,
-secret-room discovery and an exceptionally rare instant combat win.
-Apotheosis and Wish fragments generate exact temporary cards in combat instead
-of permanently filling the deck with off-character cards. Twelve curse-derived
-drawbacks add self-debuffs, damage, or curse/status cards; a relic-granting result
-is limited to once per room.
-Multiplayer-only rolls observe teammates taking HP damage, damaging enemies,
-gaining Block or gaining a buff. They can damage or heal a random living teammate,
-put an Injury in that teammate's draw pile, generate a card from that teammate's
-character pool into their hand, grant Strength, Block or a random buff, or
-force an active teammate to end their turn through the game's ready signal.
-The latter does nothing outside the player turn. These rolls are excluded in solo play.
-Random enemy buffs include Strength, Soar's attack-damage reduction and Intangible;
-the self-debuff pool includes Vulnerable, Slow, Constrict, Mind Rot and Doom.
-Relic-like fragments include first-block doubling, Intangible, next-turn energy/draw,
-Barricade, Afterimage, Double Damage, Vigor and Ritual. Feedback pairs such as
-generated-card to generated-card, Block to Block, and Gold to Gold can chain.
-One feedback chain permits at most five nested triggers and five generated cards;
-there is also a 20-effect cascade budget and 40-effect per-turn ceiling. Each
-combination activates whenever its condition is met; older saves' chance
-fields are ignored. Incompatible out-of-combat combinations are excluded.
-Poison results and Snecko Skull/Twisted Funnel fragments are Silent-only;
-Focus from Data Disk is Defect-only. Existing saved combinations from other
-characters are hidden and disabled, but not deleted. All
-effects belong to the current player, and effects they cause do not recursively
-trigger themselves without a safety limit.
-The random-buff result separately draws from 28 vetted vanilla powers, including
-card-granted buffs from other characters such as Demon Form, Echo Form,
-Afterimage, Envenom and Dark Embrace. These are applied directly as powers;
-randomly generated cards and potions still use the current character's pools.
-Two separate random-debuff results apply one of eight enemy-safe or fourteen
-player-safe vanilla debuffs, including cross-character card effects. They use
-the same five-trigger feedback safety limit.
+### 房间网格地图
 
-Other mods can register stable, namespaced custom triggers and outcomes via
-`GlitchInteractionRegistry.RegisterTrigger`, `RegisterOutcome` and `EmitAsync`.
-The random roll mixes these with built-in triggers/outcomes, and saves IDs
-rather than load-order indices. Existing numeric combinations still load.
-Generic events and the character card/potion pools already observe other
-mods' content without explicit registration. Arbitrary relic code is not
-automatically reverse-engineered into a safe standalone effect; custom
-mechanics need a small adapter using this API.
+- 外层房间按上下左右相连；每个普通房间里有短小的分岔路线，可遇到普通战斗、精英、问号、火堆、商店和宝箱。走到出口才算清理房间；已经清理的相邻房间可以返回，不会重复领取奖励。
+- 普通隐藏房倾向于贴近多个房间，超级隐藏房只挨着一个普通房间。必须对可疑墙壁使用炸弹才能发现；炸错墙也会消耗炸弹。
+- 炸弹可在地图房间中取得，也能在商店购买。战斗中使用需要 **2 点能量**，并在 **3 回合后对所有敌人造成 40 点伤害**。
+- 每层有宝箱供探索：第一章有开局宝箱及另外 2–3 个普通宝箱房；后续单人章节总计约 3–4 个。思想、指南针、藏宝图、蓝地图可作为独立的开图设置使用。
 
-Vanilla relic coverage is tracked individually in `RELIC_COVERAGE.md` for the
-installed game build (299 relic classes). The first 180 mapped fragments have
-independent condition aliases and exact-value results in the random pool.
-Their source values were read from each relic's game data. Remaining relics stay marked Pending until
-their behavior is checked and ported; a catalog entry alone is not an effect.
+### 也可以保留原版地图
 
-## Build
+关闭「启用神秘地图」后，新生成的章节沿用原版路线，但单人模式仍保留红镐子与故障遗物：首排可选择宝箱，并安排一条能经过 **3–4 个宝箱**的路线。普通地图**没有炸弹**。单人模式每章的前三场普通战斗使用较弱的敌人池，精英和 Boss 不受此调整影响。
 
-Set `STS2_GAME_DIR` to a Slay the Spire 2 installation, then run:
+地图开关只影响**之后生成的章节**；已生成的神秘地图章节仍可继续游玩。
+
+## 红镐子与故障遗物
+
+在宝箱房、商店或精英奖励界面，先点击红镐子的按钮，再领取一件遗物，就能把它变成故障遗物；红镐子**不需要充能**。再次挖掘会继续给已有的故障遗物叠加组合，不设总上限。每次增加 **3–8 条**随机的「触发条件 → 结果」，同一条件可以连两个结果，同一结果也可以由两个条件触发。满足条件就会结算，没有额外的触发概率。
+
+组合可能是「造成伤害 → 获得格挡」，也可能是「生成牌 → 再生成牌」，甚至把获得遗物、药水、增益或减益接入连锁。故障遗物**并非全是正面效果**：池中有失去生命或金币、自身减益、给敌人强化、诅咒与状态牌等。神化和许愿这类指定牌会在战斗中**临时生成到手牌**，不会永久塞满牌组。连锁有安全上限，避免无限生成导致游戏卡住。
+
+目前接入 **88 类内置触发事件、80 类内置结果**，并把 **180 件原版遗物**拆成可重新组合的条件与结果；原版共 299 件，剩余部分仍在逐一处理。详细进度见 [原版遗物覆盖表](RELIC_COVERAGE.md)。部分结果与角色绑定，例如毒相关结果仅进入静默猎手的随机池。其他模组可通过注册接口加入自己的触发和结果，但不会自动把任意遗物的代码拆解成可安全复用的效果。
+
+## 联机与测试选项
+
+联机已有地图、炸弹和红镐子的同步支持，也加入了「队友受伤／造成伤害／获得格挡或增益」等条件，以及给随机队友伤害、牌、格挡、增益或结束其回合等结果。**多人模式仍属实验性功能**，建议先用单人模式熟悉效果；同一局的所有玩家必须使用相同的模组版本。联机开图选项由房主决定。
+
+设置中的辅助选项：
+
+- **开局获得红镐子**：默认关闭；新开的单人局或由房主创建的联机局生效。
+- **显示故障遗物效果**：默认开启；关闭只隐藏具体组合，不改变触发。
+- **显示一键清怪测试按钮**：默认关闭，仅供新进入的单人战斗调试。
+
+如果遇到卡住、效果未结算或联机不同步，请记录**游戏版本、模组版本、角色、触发组合与复现步骤**，尽量附截图和游戏日志：`%APPDATA%\SlayTheSpire2\logs\godot.log`。可以在本仓库的 [Issues](https://github.com/crion99/GlitchedRelic/issues) 反馈。
+
+## 常见问题
+
+**装好了，为什么地图没有变化？** 检查模组列表是否启用、文件夹是否恰好是 `mods/MysteriousMap`，并确认「启用神秘地图」已打开。这个开关不会重画已经生成的章节；请新开一局，或进入下一章再看。
+
+**为什么找不到红镐子的按钮？** 先确认角色持有红镐子；测试时可打开「开局获得红镐子」并新开一局。按钮出现在宝箱房、商店或精英遗物奖励界面，需在领取遗物前点击。
+
+**为什么普通地图没有炸弹？** 这是当前设计：关闭房间网格地图后仍可玩红镐子与故障遗物，但炸弹和炸墙只属于网格地图。
+
+**联机时效果不同步？** 先确认所有玩家的游戏与模组版本一致，并由房主在开局前设置地图和测试选项；若仍可复现，请带上各玩家日志反馈。
+
+## 从源码构建
+
+开发环境：Windows、.NET 9、Python，以及已安装的《杀戮尖塔 2》0.111.0。设置游戏目录后运行：
 
 ```powershell
+$env:STS2_GAME_DIR = 'D:\steam\steamapps\common\Slay the Spire 2'
 .\build.ps1
 ```
 
-The installable folder is written to `build\MysteriousMap`.
-
-Run deterministic generation tests with:
+可安装文件会生成在 `build\MysteriousMap`。地图生成测试与游戏 API 兼容性检查分别运行：
 
 ```powershell
 dotnet run --project .\tests\MysteriousMap.Tests\MysteriousMap.Tests.csproj -c Release
-```
-
-Resolve and temporarily apply every Harmony patch against the installed game:
-
-```powershell
 dotnet run --project .\tests\MysteriousMap.CompatibilityTests\MysteriousMap.CompatibilityTests.csproj -c Release
 ```
 
-## Project layout
+源码目录：`Generation/` 管地图生成，`Map/` 管房间状态，`Patches/` 管游戏接口，`Rooms/` 管房间与商店，`Relics/` 管红镐子和随机效果，`assets/localization/` 提供简体中文、繁体中文及英文文本。
 
-- `Generation/` contains the outer-floor and legacy grid generators.
-- `Map/` contains the nested coordinate encoding and persistent run state.
-- `Patches/` contains map UI, travel, bomb, room, save, and multiplayer hooks.
-- `Rooms/` contains encounter and reusable-shop support.
-- `assets/localization/` contains English, Simplified Chinese, and Traditional
-  Chinese localization.
+本项目为非官方玩家模组，与游戏开发者无关联。
