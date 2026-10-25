@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/MysteriousMap.CompatibilityTests/MysteriousMap.CompatibilityTests.csproj" />
+    <Project Path="tests/MysteriousMap.Tests/MysteriousMap.Tests.csproj" />
+  </Folder>
+  <Project Path="MysteriousMap.csproj" />
+</Solution>

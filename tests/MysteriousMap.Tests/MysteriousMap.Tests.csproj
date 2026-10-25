@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Generation\GridTreeGenerator.cs" Link="GridTreeGenerator.cs" />
+    <Compile Include="..\..\Generation\HiddenRoomPlacement.cs" Link="HiddenRoomPlacement.cs" />
+    <Compile Include="..\..\Generation\NestedMapLayout.cs" Link="NestedMapLayout.cs" />
+    <Compile Include="..\..\Generation\OrdinaryRoomAllocator.cs" Link="OrdinaryRoomAllocator.cs" />
+    <Compile Include="..\..\Rooms\EncounterRotationSelector.cs" Link="EncounterRotationSelector.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+{
+  "pck_name": "MysteriousMap",
+  "id": "MysteriousMap",
+  "name": "MysteriousMap",
+  "author": "mewcodex",
+  "description": "An Isaac-style outer floor where every room contains a short branching Slay the Spire route, with bomb-discovered secret rooms.",
+  "version": "0.17.29",
+  "min_game_version": "0.111.0",
+  "has_pck": true,
+  "has_dll": true,
+  "affects_gameplay": true
+}

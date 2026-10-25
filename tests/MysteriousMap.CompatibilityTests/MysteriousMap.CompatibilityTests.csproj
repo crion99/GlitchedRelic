@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Sts2GameDir Condition="'$(Sts2GameDir)' == ''">$(STS2_GAME_DIR)</Sts2GameDir>
+    <Sts2LibDir>$(Sts2GameDir)\data_sts2_windows_x86_64</Sts2LibDir>
+  </PropertyGroup>
+  <Target Name="VerifyStsGameDir" BeforeTargets="ResolveAssemblyReferences">
+    <Error Condition="'$(Sts2GameDir)' == '' Or !Exists('$(Sts2LibDir)\sts2.dll')"
+           Text="STS2 install not found. Set STS2_GAME_DIR or pass /p:Sts2GameDir=..." />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MysteriousMap.csproj" />
+    <Reference Include="sts2"><HintPath>$(Sts2LibDir)\sts2.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="GodotSharp"><HintPath>$(Sts2LibDir)\GodotSharp.dll</HintPath><Private>true</Private></Reference>
+    <Reference Include="0Harmony"><HintPath>$(Sts2LibDir)\0Harmony.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+</Project>

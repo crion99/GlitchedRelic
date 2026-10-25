@@ -1,0 +1,31 @@
+# .NET build output
+**/bin/
+**/obj/
+build/
+
+# IDE and user-specific files
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.pfx
+*.snk
+
+# Generated mod packages and logs
+*.dll
+*.pdb
+*.deps.json
+*.pck
+*.log
+
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini

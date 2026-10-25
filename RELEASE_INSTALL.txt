@@ -1,0 +1,16 @@
+MysteriousMap 0.17.29 — 给朋友的安装说明
+
+适用：Slay the Spire 2 版本 0.111.0（其他版本未验证）。建议先用单人模式测试。
+
+1. 退出游戏。
+2. 解压此压缩包，把里面的 MysteriousMap 文件夹放到游戏安装目录的 mods 文件夹里。
+   最终路径应为：...\Slay the Spire 2\mods\MysteriousMap\MysteriousMap.dll
+   同一文件夹内还应有 MysteriousMap.json 和 MysteriousMap.pck。
+3. 如果已安装旧版 MysteriousMap，覆盖这三个同名文件；不要同时保留两个版本。
+4. 启动游戏，开启模组并新开一局“神秘地图”模式。已有普通模式存档不会自动变成房间地图。
+
+红镐子现在无需充能：在宝箱房领取遗物前点击“红镐子”按钮即可使用。
+“开局获得红镐子”和“一键清怪”是测试选项，可在神秘地图设置中按需开启。
+
+如果遇到卡住或不结算，请保留截图，并发送游戏日志：
+%APPDATA%\SlayTheSpire2\logs\godot.log
