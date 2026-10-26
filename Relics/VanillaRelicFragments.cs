@@ -26,7 +26,8 @@ internal static partial class VanillaRelicFragments
     private static readonly HashSet<string> DrawbackResults =
     [
         "royal_poison", "tea_of_discourtesy", "blood_soaked_rose",
-        "blessed_antler", "calling_bell", "neows_bones", "bread"
+        "blessed_antler", "calling_bell", "neows_bones", "bread",
+        "precarious_shears", "philosophers_stone"
     ];
 
     internal static void Register()
@@ -146,6 +147,7 @@ internal static partial class VanillaRelicFragments
         RegisterCondition("radiant_pearl", GlitchTrigger.FirstTurnCombat, true, true);
         RegisterBatch2();
         RegisterBatch3();
+        RegisterBatch4();
 
         RegisterResult("anchor", true, false, async context =>
             await CreatureCmd.GainBlock(context.Owner.Creature, 10m,

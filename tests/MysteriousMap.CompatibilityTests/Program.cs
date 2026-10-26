@@ -89,6 +89,12 @@ try
                  (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastMaxHpRoomCount)),
                  (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastInjuryRoomCount)),
                  (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastGrantedRelicRoomCount)),
+                 (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastDollyMirrorRoomCount)),
+                 (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastMassiveScrollRoomCount)),
+                 (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastPlanisphereRoomCount)),
+                 (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastPrecariousShearsRoomCount)),
+                 (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.LastPandorasBoxRoomCount)),
+                 (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.FiveRingsProgress)),
                  (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.FlowerTurnCounter)),
                  (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.FakeFlowerTurnCounter)),
                  (typeof(MysteriousGlitchedRelic), nameof(MysteriousGlitchedRelic.TenAttackCounter))
@@ -231,9 +237,17 @@ try
         throw new InvalidOperationException("Glitch links must be 1:1, 1:2 or 2:1, never a larger mesh.");
     if (!glitch.PackedIconPath.StartsWith("res://MysteriousMap/relics/", StringComparison.Ordinal))
         throw new InvalidOperationException("The glitched relic must use original mod artwork.");
-    if (GlitchInteractionRegistry.AllTriggers.Count(item => item.Id.StartsWith("vanilla.")) != 180 ||
-        GlitchInteractionRegistry.AllOutcomes.Count(item => item.Id.StartsWith("vanilla.")) != 180)
-        throw new InvalidOperationException("The 180 vanilla relic fragments were not registered.");
+    if (GlitchInteractionRegistry.AllTriggers.Count(item => item.Id.StartsWith("vanilla.")) != 190 ||
+        GlitchInteractionRegistry.AllOutcomes.Count(item => item.Id.StartsWith("vanilla.")) != 190)
+        throw new InvalidOperationException("The 190 vanilla relic fragments were not registered.");
+    foreach (var name in new[] { "book_of_five_rings", "planisphere", "delicate_frond",
+                 "petrified_toad", "paels_blood", "dollys_mirror", "precarious_shears",
+                 "pandoras_box", "massive_scroll", "philosophers_stone" })
+    {
+        if (!GlitchInteractionRegistry.AllTriggers.Any(item => item.Id == $"vanilla.{name}.condition") ||
+            !GlitchInteractionRegistry.AllOutcomes.Any(item => item.Id == $"vanilla.{name}.result"))
+            throw new InvalidOperationException($"Vanilla fragment {name} is missing a condition or result.");
+    }
     foreach (var name in new[] { "jewelry_box", "sere_talon" })
     {
         var result = GlitchInteractionRegistry.AllOutcomes.First(item =>
@@ -257,6 +271,8 @@ try
     if (GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Ironclad(),
             "vanilla.paels_horn.result") ||
         GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Ironclad(),
+            "vanilla.paels_blood.result") ||
+        GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Ironclad(),
             "vanilla.electric_shrymp.result") ||
         GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Ironclad(),
             "vanilla.paels_growth.result") ||
@@ -266,6 +282,8 @@ try
             "vanilla.mini_regent.result") ||
         !GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Necrobinder(),
             "vanilla.paels_tooth.result") ||
+        !GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Necrobinder(),
+            "vanilla.paels_blood.result") ||
         !GlitchCharacterPool.Allows(new MegaCrit.Sts2.Core.Models.Characters.Regent(),
             "vanilla.mini_regent.result"))
         throw new InvalidOperationException("Character-specific fragments leaked into another pool.");

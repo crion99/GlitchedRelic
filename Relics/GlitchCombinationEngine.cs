@@ -150,6 +150,24 @@ public sealed partial class MysteriousGlitchedRelic
     [SavedProperty]
     public int LastGrantedRelicRoomCount { get; set; } = -1;
 
+    [SavedProperty]
+    public int LastDollyMirrorRoomCount { get; set; } = -1;
+
+    [SavedProperty]
+    public int LastMassiveScrollRoomCount { get; set; } = -1;
+
+    [SavedProperty]
+    public int LastPlanisphereRoomCount { get; set; } = -1;
+
+    [SavedProperty]
+    public int LastPrecariousShearsRoomCount { get; set; } = -1;
+
+    [SavedProperty]
+    public int LastPandorasBoxRoomCount { get; set; } = -1;
+
+    [SavedProperty]
+    public int FiveRingsProgress { get; set; }
+
     internal int AddRandomCombinations()
     {
         if (Owner?.RunState is not RunState state)

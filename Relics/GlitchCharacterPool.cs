@@ -57,7 +57,8 @@ internal static class GlitchCharacterPool
                 => character is Defect,
             "vanilla.paels_growth.condition" or "vanilla.paels_growth.result" or
                 "vanilla.paels_tooth.condition" or "vanilla.paels_tooth.result" or
-                "vanilla.funerary_mask.condition" or "vanilla.funerary_mask.result"
+                "vanilla.funerary_mask.condition" or "vanilla.funerary_mask.result" or
+                "vanilla.paels_blood.condition" or "vanilla.paels_blood.result"
                 => character is Necrobinder,
             "vanilla.mini_regent.condition" or "vanilla.mini_regent.result"
                 => character is Regent,

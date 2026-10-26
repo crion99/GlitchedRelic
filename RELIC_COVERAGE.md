@@ -1,6 +1,6 @@
 # Original relic coverage (STS2 0.111.0)
 
-This inventory is generated from the installed game's relic classes. A hook name identifies an interaction point, **not** its effect. `Fragment` means its condition has a mapped event alias and its result/value is in the Dataminer pool; it does not mean the original relic's full implementation was copied. `Pending` means its unique effect has not been individually ported; generic events may still observe it. Current progress: **180 fragments, 119 pending**.
+This inventory is generated from the installed game's relic classes. A hook name identifies an interaction point, **not** its effect. `Fragment` means its condition has a mapped event alias and its result/value is in the Dataminer pool; it does not mean the original relic's full implementation was copied. `Pending` means its unique effect has not been individually ported; generic events may still observe it. Current progress: **190 fragments, 109 pending**.
 
 | # | Relic class | Declared hooks | Unique effect |
 |---:|---|---|---|
@@ -30,7 +30,7 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 24 | `BoneFlute` | `AfterAttack` | Fragment |
 | 25 | `BoneTea` | `AfterPlayerTurnStart` | Fragment |
 | 26 | `Bookmark` | `AfterFlush` | Pending |
-| 27 | `BookOfFiveRings` | `AfterCardChangedPiles` | Pending |
+| 27 | `BookOfFiveRings` | `AfterCardChangedPiles` | Fragment |
 | 28 | `BookRepairKnife` | `AfterDiedToDoom` | Pending |
 | 29 | `BoomingConch` | `AfterSideTurnStart`, `ModifyHandDraw` | Fragment |
 | 30 | `BoundPhylactery` | `AfterEnergyResetLate`, `BeforeCombatStart` | Pending |
@@ -61,7 +61,7 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 55 | `DarkstonePeriapt` | `AfterCardChangedPiles` | Fragment |
 | 56 | `DataDisk` | `AfterRoomEntered` | Fragment |
 | 57 | `DaughterOfTheWind` | `AfterCardPlayed` | Fragment |
-| 58 | `DelicateFrond` | `BeforeCombatStart` | Pending |
+| 58 | `DelicateFrond` | `BeforeCombatStart` | Fragment |
 | 59 | `DemonTongue` | `AfterDamageReceived`, `BeforeSideTurnStart` | Pending |
 | 60 | `DeprecatedRelic` | — | Pending |
 | 61 | `DiamondDiadem` | `AfterSideTurnStart` | Fragment |
@@ -69,7 +69,7 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 63 | `DistinguishedCape` | `AfterObtained` | Fragment |
 | 64 | `DivineDestiny` | `AfterSideTurnStart` | Fragment |
 | 65 | `DivineRight` | `AfterRoomEntered` | Fragment |
-| 66 | `DollysMirror` | `AfterObtained` | Pending |
+| 66 | `DollysMirror` | `AfterObtained` | Fragment |
 | 67 | `DowsingRod` | `AfterObtained` | Fragment |
 | 68 | `DragonFruit` | `AfterGoldGained` | Fragment |
 | 69 | `DreamCatcher` | `ModifyExtraRestSiteHealText` | Pending |
@@ -150,7 +150,7 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 144 | `LuckyFysh` | `AfterCardChangedPiles` | Fragment |
 | 145 | `LunarPastry` | `AfterSideTurnEnd` | Fragment |
 | 146 | `Mango` | `AfterObtained` | Fragment |
-| 147 | `MassiveScroll` | `AfterObtained` | Pending |
+| 147 | `MassiveScroll` | `AfterObtained` | Fragment |
 | 148 | `MawBank` | `AfterItemPurchased`, `AfterRoomEntered` | Fragment |
 | 149 | `MealTicket` | `AfterRoomEntered` | Fragment |
 | 150 | `MeatCleaver` | — | Pending |
@@ -181,7 +181,7 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 175 | `Orichalcum` | `BeforeSideTurnEnd`, `BeforeSideTurnEndVeryEarly`, `BeforeSideTurnStart` | Fragment |
 | 176 | `OrnamentalFan` | `AfterCardPlayed`, `AfterCombatEnd`, `BeforeSideTurnStart` | Fragment |
 | 177 | `Orrery` | `AfterObtained` | Fragment |
-| 178 | `PaelsBlood` | `ModifyHandDraw` | Pending |
+| 178 | `PaelsBlood` | `ModifyHandDraw` | Fragment |
 | 179 | `PaelsClaw` | `AfterObtained` | Fragment |
 | 180 | `PaelsEye` | `AfterCombatEnd`, `AfterObtained`, `AfterSideTurnStart`, `AfterTakingExtraTurn`, `BeforeCardPlayed`, `BeforeSideTurnEndEarly` | Pending |
 | 181 | `PaelsFlesh` | `AfterCombatEnd`, `AfterSideTurnStart`, `BeforeCombatStart`, `BeforeSideTurnStart`, `ModifyMaxEnergy` | Pending |
@@ -191,7 +191,7 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 185 | `PaelsTears` | `AfterCombatEnd`, `AfterSideTurnStart`, `BeforeSideTurnEnd` | Pending |
 | 186 | `PaelsTooth` | `AfterCloned`, `AfterCombatEnd`, `AfterObtained` | Fragment |
 | 187 | `PaelsWing` | — | Pending |
-| 188 | `PandorasBox` | `AfterObtained` | Pending |
+| 188 | `PandorasBox` | `AfterObtained` | Fragment |
 | 189 | `Pantograph` | `AfterRoomEntered`, `BeforeCombatStart` | Fragment |
 | 190 | `PaperKrane` | — | Pending |
 | 191 | `PaperPhrog` | — | Pending |
@@ -200,18 +200,18 @@ This inventory is generated from the installed game's relic classes. A hook name
 | 194 | `Pendulum` | `AfterCombatEnd`, `BeforeHandDraw`, `ModifyHandDraw` | Pending |
 | 195 | `PenNib` | `AfterCardPlayed`, `BeforeCardPlayed`, `ModifyDamageMultiplicative` | Pending |
 | 196 | `Permafrost` | `AfterCardPlayed`, `AfterRoomEntered` | Fragment |
-| 197 | `PetrifiedToad` | `BeforeCombatStartLate` | Pending |
+| 197 | `PetrifiedToad` | `BeforeCombatStartLate` | Fragment |
 | 198 | `PhialHolster` | `AfterObtained` | Fragment |
-| 199 | `PhilosophersStone` | `AfterCreatureAddedToCombat`, `AfterRoomEntered`, `ModifyMaxEnergy` | Pending |
+| 199 | `PhilosophersStone` | `AfterCreatureAddedToCombat`, `AfterRoomEntered`, `ModifyMaxEnergy` | Fragment |
 | 200 | `PhylacteryUnbound` | `AfterSideTurnStart`, `BeforeCombatStart` | Pending |
-| 201 | `Planisphere` | `AfterRoomEntered` | Pending |
+| 201 | `Planisphere` | `AfterRoomEntered` | Fragment |
 | 202 | `Pocketwatch` | `AfterCardPlayed`, `AfterCombatEnd`, `AfterModifyingHandDraw`, `AfterSideTurnStart`, `BeforeSideTurnStart`, `ModifyHandDraw` | Fragment |
 | 203 | `PollinousCore` | `AfterCombatEnd`, `AfterModifyingHandDraw`, `BeforeHandDraw`, `ModifyHandDraw` | Pending |
 | 204 | `Pomander` | `AfterObtained` | Fragment |
 | 205 | `PotionBelt` | `AfterObtained` | Fragment |
 | 206 | `PowerCell` | `BeforeSideTurnStart` | Fragment |
 | 207 | `PrayerWheel` | — | Pending |
-| 208 | `PrecariousShears` | `AfterObtained` | Pending |
+| 208 | `PrecariousShears` | `AfterObtained` | Fragment |
 | 209 | `PreciseScissors` | `AfterObtained` | Fragment |
 | 210 | `PreservedFog` | `AfterObtained` | Fragment |
 | 211 | `PrismaticGem` | `ModifyCardRewardCreationOptions`, `ModifyMaxEnergy` | Pending |
